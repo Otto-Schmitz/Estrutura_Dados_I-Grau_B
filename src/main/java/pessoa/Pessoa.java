@@ -17,6 +17,8 @@ public class Pessoa {
         this.cidade = cidade;
     }
 
+    public Pessoa() {}
+
     public String getNome() {
         return nome;
     }

@@ -1,12 +1,18 @@
 package ui;
 
+import pessoa.Pessoa;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import static leitor.CsvReader.reader;
+
 public class Ui {
-        private Scanner sc = new Scanner(System.in);
+        private static Scanner sc = new Scanner(System.in);
+        private static ArrayList<Pessoa> pessoas = new ArrayList<>();
 
 
-        public void menu() {
+        public static void menu() {
             System.out.println("ARVORE AVL - ESTRUTURAS AVANCADAS DE DADOS I\n");
             System.out.println("0 - Arvore de Demonstracao");
             System.out.println("1 - Inserir");
@@ -23,10 +29,11 @@ public class Ui {
 
         }
 
-        private void menuAux(int escolha) {
+        private static void menuAux(int escolha) {
             System.out.println();
             switch (escolha) {
-                case 0 -> System.out.println();
+                case 1 -> inserir();
+                case 2 -> System.out.println(pessoas.get(0).getNome());
                 case 10 -> System.out.println("Adeus");
 
             }
@@ -35,7 +42,7 @@ public class Ui {
                 menu();
         }
 
-        private int trataIntMenu() {
+        private static int trataIntMenu() {
             while (true) {
                 try {
                     System.out.print("Escolha um item da lista: ");
@@ -50,17 +57,10 @@ public class Ui {
             }
         }
 
-        private int trataInt() {
-            while (true) {
-                try {
-                    System.out.print("Digite um valor: ");
-                    String escolhaAux = sc.nextLine();
-                    int escolha = Integer.parseInt(escolhaAux);
-                    return escolha;
-
-                } catch (Exception e) {
-                    System.out.print("Tente novamente");
-                }
-            }
+        private static void inserir() {
+            System.out.println("Digite o nome do arquivo Csv: ");
+            String arquivo = sc.nextLine();
+            ArrayList<Pessoa> array = reader(arquivo);
+            if (!array.isEmpty()) pessoas = array;
         }
 }
