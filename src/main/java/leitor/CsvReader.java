@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 import static enuns.PessoaProps.*;
+import static java.lang.String.format;
 
 public class CsvReader {
     public static ArrayList<Pessoa> reader(String planilha) {
-        String arquivo = String.format("%s.csv",planilha);
+        String arquivo = format("%s.csv",planilha);
         BufferedReader br = null;
         String linha = "";
         String divisor = ";";
@@ -25,7 +26,7 @@ public class CsvReader {
                 pessoas.add(toPessoa(array));
             }
         }catch (Exception e) {
-            System.out.println(String.format("Não foi possível localizar o arquivo %s", planilha));
+            System.out.printf("Não foi possível localizar o arquivo %s%n", planilha);
         }
 
         return pessoas;

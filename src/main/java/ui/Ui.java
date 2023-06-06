@@ -1,5 +1,6 @@
 package ui;
 
+import arvore.AvlNome;
 import pessoa.Pessoa;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import static leitor.CsvReader.reader;
 public class Ui {
         private static Scanner sc = new Scanner(System.in);
         private static ArrayList<Pessoa> pessoas = new ArrayList<>();
+        private static AvlNome avlNome = new AvlNome();
 
 
         public static void menu() {
@@ -62,5 +64,15 @@ public class Ui {
             String arquivo = sc.nextLine();
             ArrayList<Pessoa> array = reader(arquivo);
             if (!array.isEmpty()) pessoas = array;
+
+            for(int i = 0; i < pessoas.size(); i++) {
+                Pessoa pessoa = pessoas.get(i);
+                avlNome.inserir(pessoa.getNome(), i);
+            }
+            System.out.println("a");
+        }
+
+        private static void verificarNome() {
+
         }
 }

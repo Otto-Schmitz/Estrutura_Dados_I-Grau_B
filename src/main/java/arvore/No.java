@@ -9,6 +9,11 @@ public class No {
 
     public No() {}
 
+    public No(int index, String propriedade) {
+        this.index = index;
+        this.propriedade = propriedade;
+    }
+
     public No(int index, No noEsquerdo, No noDireito, int altura, String propriedade) {
         this.index = index;
         this.noEsquerdo = noEsquerdo;

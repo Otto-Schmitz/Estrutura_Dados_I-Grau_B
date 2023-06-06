@@ -4,17 +4,12 @@ import java.util.ArrayList;
 
 public class AvlDataNascimento implements Avl{
 
-    @Override
-    public int getAltura(No no) {
-        return 0;
-    }
 
     @Override
     public void inserir(String propriedade, int index) {
 
     }
 
-    @Override
     public No inserirAux(No no, String propriedade, int index) {
         return null;
     }
@@ -24,7 +19,6 @@ public class AvlDataNascimento implements Avl{
         return null;
     }
 
-    @Override
     public ArrayList<Integer> buscarAux(String propriedade, No no) {
         return null;
     }
