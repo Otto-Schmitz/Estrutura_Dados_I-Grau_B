@@ -59,10 +59,39 @@ public class AvlNome implements Avl{
 
     @Override
     public ArrayList<Integer> buscar(String propriedade) {
-        return null;
+        return buscarAux(propriedade, this.raiz, new ArrayList<Integer>());
     }
 
-    public ArrayList<Integer> buscarAux(String propriedade, No no) {
-        return null;
+    public ArrayList<Integer> buscarAux(String propriedade, No no, ArrayList<Integer> arrayList) {
+        if(no == null) {
+            return arrayList;
+        }
+
+        if (no.getPropriedade().startsWith(propriedade)) {
+            arrayList.add(no.getIndex());
+        }
+
+        if (propriedade.compareTo(no.getPropriedade()) < 0) {
+            arrayList = buscarAux(propriedade, no.getNoEsquerdo(), arrayList);
+        }
+        else if (propriedade.compareTo(no.getPropriedade()) > 0) {
+            arrayList = buscarAux(propriedade, no.getNoDireito(), arrayList);
+        }
+
+
+
+//        if(numero < no.getNumero()) {
+//            no = verificarNumeroAux(numero, no.getNoEsquerdo());
+//        }
+//        else if(numero > no.getNumero()) {
+//            no = verificarNumeroAux(numero, no.getNoDireito());
+//        }
+//        else if(numero != no.getNumero()) {
+//            no = this.raiz;
+//        }
+//        return no;
+
+
+        return arrayList;
     }
 }

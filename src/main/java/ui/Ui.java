@@ -69,7 +69,6 @@ public class Ui {
                 Pessoa pessoa = pessoas.get(i);
                 avlNome.inserir(pessoa.getNome(), i);
             }
-            System.out.println("a");
         }
 
         private static void verificarNome() {
