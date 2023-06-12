@@ -1,7 +1,9 @@
 package arvore;
 
+import java.util.ArrayList;
+
 public class No {
-    private int index;
+    private ArrayList<Integer> index = new ArrayList();
     private No noEsquerdo;
     private No noDireito;
     private int altura;
@@ -9,25 +11,25 @@ public class No {
 
     public No() {}
 
-    public No(int index, String propriedade) {
-        this.index = index;
+    public No(Integer index, String propriedade) {
+        this.index.add(index);
         this.propriedade = propriedade;
     }
 
     public No(int index, No noEsquerdo, No noDireito, int altura, String propriedade) {
-        this.index = index;
+        this.index.add(index);
         this.noEsquerdo = noEsquerdo;
         this.noDireito = noDireito;
         this.altura = altura;
         this.propriedade = propriedade;
     }
 
-    public int getIndex() {
+    public ArrayList<Integer> getIndex() {
         return index;
     }
 
     public void setIndex(int index) {
-        this.index = index;
+        this.index.add(index);
     }
 
     public No getNoEsquerdo() {

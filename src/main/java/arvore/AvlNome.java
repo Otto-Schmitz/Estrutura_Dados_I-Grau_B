@@ -1,6 +1,8 @@
 package arvore;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static arvore.Avl.*;
 
@@ -30,6 +32,7 @@ public class AvlNome implements Avl{
             no.setNoDireito(inserirAux(no.getNoDireito(), propriedade, index));
         }
         else {
+            no.setIndex(index);
             return no;
         }
 
@@ -68,7 +71,7 @@ public class AvlNome implements Avl{
         }
 
         if (no.getPropriedade().startsWith(propriedade)) {
-            arrayList.add(no.getIndex());
+            arrayList.addAll(no.getIndex());
         }
 
         if (propriedade.compareTo(no.getPropriedade()) < 0) {
@@ -93,5 +96,44 @@ public class AvlNome implements Avl{
 
 
         return arrayList;
+    }
+
+    public Set<Integer> emOrdem(String propriedade) {
+        return emOrdemAux(this.raiz, new HashSet<>(), propriedade);
+    }
+
+    private Set<Integer> emOrdemAux(No no, Set<Integer> ordem, String propriedade) {
+        if(no != null) {
+            if(no.getPropriedade().compareTo(propriedade) > 0){
+                ordem = emOrdemAux(no.getNoEsquerdo(), ordem, propriedade);
+                ordem = emOrdemAux(no.getNoDireito(), ordem, propriedade);
+            }
+
+            if(no.getPropriedade().compareTo(propriedade) < 0){
+                ordem = emOrdemAux(no.getNoDireito(), ordem, propriedade);
+                ordem = emOrdemAux(no.getNoEsquerdo(), ordem, propriedade);
+            }
+
+            if (no.getPropriedade().startsWith(propriedade)) {
+                ordem.addAll(no.getIndex());
+            }
+
+
+
+//            if (no.getNoDireito() != null) {
+//                ordem = emOrdemAux(no.getNoEsquerdo(), ordem, propriedade);
+//            }
+//
+//            if (propriedade.compareTo(no.getPropriedade()) < 0) {
+//                ordem = emOrdemAux(no.getNoEsquerdo(), ordem, propriedade);
+//            }
+//            else if (propriedade.compareTo(no.getPropriedade()) > 0) {
+//                ordem = emOrdemAux(no.getNoDireito(), ordem, propriedade);
+//            }
+//            ordem = emOrdemAux(no.getNoDireito(), ordem, propriedade);
+            System.out.println(no.getPropriedade());
+        }
+
+        return ordem;
     }
 }

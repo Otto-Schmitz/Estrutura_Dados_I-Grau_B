@@ -5,6 +5,7 @@ import pessoa.Pessoa;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 import static leitor.CsvReader.reader;
 
@@ -36,6 +37,7 @@ public class Ui {
             switch (escolha) {
                 case 1 -> inserir();
                 case 2 -> System.out.println(pessoas.get(0).getNome());
+                case 3 -> buscar();
                 case 10 -> System.out.println("Adeus");
 
             }
@@ -60,14 +62,25 @@ public class Ui {
         }
 
         private static void inserir() {
-            System.out.println("Digite o nome do arquivo Csv: ");
-            String arquivo = sc.nextLine();
+//            System.out.println("Digite o nome do arquivo Csv: ");
+//            String arquivo = sc.nextLine();
+            String arquivo = "planilha";
             ArrayList<Pessoa> array = reader(arquivo);
             if (!array.isEmpty()) pessoas = array;
 
             for(int i = 0; i < pessoas.size(); i++) {
                 Pessoa pessoa = pessoas.get(i);
                 avlNome.inserir(pessoa.getNome(), i);
+            }
+        }
+
+        private static void buscar() {
+            System.out.println("Digite o nome: ");
+            String arquivo = sc.nextLine();
+            Set<Integer> set = avlNome.emOrdem(arquivo);
+
+            for(Integer i : set) {
+                System.out.println(pessoas.get(i).getNome());
             }
         }
 

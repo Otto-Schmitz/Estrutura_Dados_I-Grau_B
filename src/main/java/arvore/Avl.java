@@ -41,6 +41,7 @@ public interface Avl {
         return noNovo;
     }
 
+
     void inserir(String propriedade, int index);
 
     ArrayList<Integer> buscar(String propriedade);
