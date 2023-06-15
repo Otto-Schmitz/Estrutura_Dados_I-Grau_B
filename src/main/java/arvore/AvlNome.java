@@ -98,42 +98,62 @@ public class AvlNome implements Avl{
         return arrayList;
     }
 
-    public Set<Integer> emOrdem(String propriedade) {
-        return emOrdemAux(this.raiz, new HashSet<>(), propriedade);
+    public ArrayList<Integer> buscarPorNome(String prefixo) {
+        ArrayList<Integer> indexesEncontrados = new ArrayList<>();
+        buscarPorNomeAux(raiz, prefixo, indexesEncontrados);
+        return indexesEncontrados;
     }
 
-    private Set<Integer> emOrdemAux(No no, Set<Integer> ordem, String propriedade) {
-        if(no != null) {
-            if(no.getPropriedade().compareTo(propriedade) > 0){
-                ordem = emOrdemAux(no.getNoEsquerdo(), ordem, propriedade);
-                ordem = emOrdemAux(no.getNoDireito(), ordem, propriedade);
-            }
-
-            if(no.getPropriedade().compareTo(propriedade) < 0){
-                ordem = emOrdemAux(no.getNoDireito(), ordem, propriedade);
-                ordem = emOrdemAux(no.getNoEsquerdo(), ordem, propriedade);
-            }
-
-            if (no.getPropriedade().startsWith(propriedade)) {
-                ordem.addAll(no.getIndex());
-            }
-
-
-
-//            if (no.getNoDireito() != null) {
-//                ordem = emOrdemAux(no.getNoEsquerdo(), ordem, propriedade);
-//            }
-//
-//            if (propriedade.compareTo(no.getPropriedade()) < 0) {
-//                ordem = emOrdemAux(no.getNoEsquerdo(), ordem, propriedade);
-//            }
-//            else if (propriedade.compareTo(no.getPropriedade()) > 0) {
-//                ordem = emOrdemAux(no.getNoDireito(), ordem, propriedade);
-//            }
-//            ordem = emOrdemAux(no.getNoDireito(), ordem, propriedade);
-            System.out.println(no.getPropriedade());
+    private void buscarPorNomeAux(No no, String prefixo, ArrayList<Integer> indexesEncontrados) {
+        if (no == null) {
+            return;
         }
 
-        return ordem;
+        System.out.println(no);
+
+        int comparacao = prefixo.compareTo(no.getPropriedade());
+
+        if (comparacao <= 0 && no.getPropriedade().startsWith(prefixo)) {
+            buscarPorNomeAux(no.getNoEsquerdo(), prefixo, indexesEncontrados);
+            buscarPorNomeAux(no.getNoDireito(), prefixo, indexesEncontrados);
+            indexesEncontrados.addAll(no.getIndex());
+        }
+        else if (prefixo.compareTo(no.getPropriedade()) < 0) {
+            buscarPorNomeAux(no.getNoEsquerdo(), prefixo, indexesEncontrados);
+        }
+        else{
+            buscarPorNomeAux(no.getNoDireito(), prefixo, indexesEncontrados);
+        }
     }
+
+
+    @Override
+    public String toString() {
+        String result = "";
+        if (raiz == null) {
+            result += "Raiz nula\n";
+            return result;
+        }
+        int tab = 1;
+        result += "[RAIZ]---" + raiz + "\n";
+        result += adicionarSubArvoreToString(raiz.getNoEsquerdo(), tab, "ESQ");
+        result += adicionarSubArvoreToString(raiz.getNoDireito(), tab, "DIR");
+        return result;
+    }
+
+    private String adicionarSubArvoreToString(No no, int tab, String lado) {
+        String result = "";
+        if (no != null) {
+            String txt = "";
+            for (int i = 0; i < tab; i++) {
+                txt += "\t";
+            }
+            result += txt + "[" + lado + "]" + "---" + no + "\n";
+            result += adicionarSubArvoreToString(no.getNoEsquerdo(), tab + 1, "ESQ");
+            result += adicionarSubArvoreToString(no.getNoDireito(), tab + 1, "DIR");
+        }
+        return result;
+    }
+
+
 }

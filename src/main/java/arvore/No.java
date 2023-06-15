@@ -64,4 +64,10 @@ public class No {
         this.propriedade = propriedade;
     }
 
+    @Override
+    public String toString(){
+        return "[ "+propriedade+" ]";
+    }
+
+
 }

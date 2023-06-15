@@ -38,6 +38,7 @@ public class Ui {
                 case 1 -> inserir();
                 case 2 -> System.out.println(pessoas.get(0).getNome());
                 case 3 -> buscar();
+                case 4 -> System.out.println(avlNome);
                 case 10 -> System.out.println("Adeus");
 
             }
@@ -77,7 +78,7 @@ public class Ui {
         private static void buscar() {
             System.out.println("Digite o nome: ");
             String arquivo = sc.nextLine();
-            Set<Integer> set = avlNome.emOrdem(arquivo);
+            ArrayList<Integer> set = avlNome.buscarPorNome(arquivo);
 
             for(Integer i : set) {
                 System.out.println(pessoas.get(i).getNome());
