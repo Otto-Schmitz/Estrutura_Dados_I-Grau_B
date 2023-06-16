@@ -11,25 +11,21 @@ public class Avl{
         raiz = null;
     }
 
-    public void inserirNome(String propriedade, int index) {
-        this.raiz = inserirNomeAux(this.raiz, propriedade, index);
-    }
-
-    static int getAltura(No no) {
+    private int getAltura(No no) {
         if (no == null) {
             return 0;
         }
         return no.getAltura();
     }
 
-    static int calcularBalanceamento(No no) {
+    private int calcularBalanceamento(No no) {
         if (no == null) {
             return 0;
         }
         return getAltura(no.getNoEsquerdo()) - getAltura(no.getNoDireito());
     }
 
-    static No rotacionarDireita(No no) {
+    private No rotacionarDireita(No no) {
         No noNovo = no.getNoEsquerdo();
 
         no.setNoEsquerdo(noNovo.getNoDireito());
@@ -41,7 +37,7 @@ public class Avl{
         return noNovo;
     }
 
-    static No rotacionarEsquerda(No no) {
+     private No rotacionarEsquerda(No no) {
         No noNovo = no.getNoDireito();
 
         no.setNoDireito(noNovo.getNoEsquerdo());
@@ -51,6 +47,10 @@ public class Avl{
         noNovo.setAltura(Math.max(getAltura(noNovo.getNoEsquerdo()), getAltura(noNovo.getNoDireito())) + 1);
 
         return noNovo;
+    }
+
+    public void inserirNome(String propriedade, int index) {
+        this.raiz = inserirNomeAux(this.raiz, propriedade, index);
     }
 
     private No inserirNomeAux(No no, String propriedade, int index) {
@@ -75,21 +75,17 @@ public class Avl{
 
         int balanceamento = calcularBalanceamento(no);
         if (balanceamento > 1) {
-            if (propriedade.compareTo(no.getNoEsquerdo().getPropriedade()) < 0) {
-                return rotacionarDireita(no);
-            } else {
+            if (propriedade.compareTo(no.getNoEsquerdo().getPropriedade()) >= 0) {
                 no.setNoEsquerdo(rotacionarEsquerda(no.getNoEsquerdo()));
-                return rotacionarDireita(no);
             }
+            return rotacionarDireita(no);
         }
 
         if (balanceamento < -1) {
-            if (propriedade.compareTo(no.getNoDireito().getPropriedade()) > 0) {
-                return rotacionarEsquerda(no);
-            } else {
+            if (propriedade.compareTo(no.getNoDireito().getPropriedade()) <= 0) {
                 no.setNoDireito(rotacionarDireita(no.getNoDireito()));
-                return rotacionarEsquerda(no);
             }
+            return rotacionarEsquerda(no);
         }
 
         return no;
@@ -119,28 +115,24 @@ public class Avl{
 
         int balanceamento = calcularBalanceamento(no);
         if (balanceamento > 1) {
-            if (Long.parseLong(propriedade) < Long.parseLong(no.getNoEsquerdo().getPropriedade())) {
-                return rotacionarDireita(no);
-            } else {
+            if (Long.parseLong(propriedade) >= Long.parseLong(no.getNoEsquerdo().getPropriedade())) {
                 no.setNoEsquerdo(rotacionarEsquerda(no.getNoEsquerdo()));
-                return rotacionarDireita(no);
             }
+            return rotacionarDireita(no);
         }
 
         if (balanceamento < -1) {
-            if (Long.parseLong(propriedade) > Long.parseLong(no.getNoDireito().getPropriedade())) {
-                return rotacionarEsquerda(no);
-            } else {
+            if (Long.parseLong(propriedade) <= Long.parseLong(no.getNoDireito().getPropriedade())) {
                 no.setNoDireito(rotacionarDireita(no.getNoDireito()));
-                return rotacionarEsquerda(no);
             }
+            return rotacionarEsquerda(no);
         }
 
         return no;
 
     }
 
-    public static int compararDatas(String data1, String data2) {
+    private int compararDatas(String data1, String data2) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate1 = LocalDate.parse(data1, formatter);
         LocalDate localDate2 = LocalDate.parse(data2, formatter);
@@ -180,21 +172,17 @@ public class Avl{
 
         int balanceamento = calcularBalanceamento(no);
         if (balanceamento > 1) {
-            if (compararDatas(propriedade,no.getNoEsquerdo().getPropriedade()) == -1) {
-                return rotacionarDireita(no);
-            } else {
+            if (compararDatas(propriedade, no.getNoEsquerdo().getPropriedade()) != -1) {
                 no.setNoEsquerdo(rotacionarEsquerda(no.getNoEsquerdo()));
-                return rotacionarDireita(no);
             }
+            return rotacionarDireita(no);
         }
 
         if (balanceamento < -1) {
-            if (compararDatas(propriedade,no.getNoDireito().getPropriedade()) == 1) {
-                return rotacionarEsquerda(no);
-            } else {
+            if (compararDatas(propriedade, no.getNoDireito().getPropriedade()) != 1) {
                 no.setNoDireito(rotacionarDireita(no.getNoDireito()));
-                return rotacionarEsquerda(no);
             }
+            return rotacionarEsquerda(no);
         }
 
         return no;
@@ -242,10 +230,10 @@ public class Avl{
             indexesEncontrados.addAll(no.getIndex());
         }
         else if (Long.parseLong(cpf) < Long.parseLong(no.getPropriedade())) {
-            buscarPorNomeAux(no.getNoEsquerdo(), cpf, indexesEncontrados);
+            buscarPorCpfAux(no.getNoEsquerdo(), cpf, indexesEncontrados);
         }
         else{
-            buscarPorNomeAux(no.getNoDireito(), cpf, indexesEncontrados);
+            buscarPorCpfAux(no.getNoDireito(), cpf, indexesEncontrados);
         }
     }
 
@@ -301,11 +289,7 @@ public class Avl{
     private String adicionarSubArvoreToString(No no, int tab, String lado) {
         String result = "";
         if (no != null) {
-            String txt = "";
-            for (int i = 0; i < tab; i++) {
-                txt += "\t";
-            }
-            result += txt + "[" + lado + "]" + "---" + no + "\n";
+            result += "\t".repeat(Math.max(0, tab)) + "[" + lado + "]" + "---" + no + "\n";
             result += adicionarSubArvoreToString(no.getNoEsquerdo(), tab + 1, "ESQ");
             result += adicionarSubArvoreToString(no.getNoDireito(), tab + 1, "DIR");
         }
