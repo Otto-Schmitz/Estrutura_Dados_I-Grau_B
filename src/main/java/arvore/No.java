@@ -3,26 +3,16 @@ package arvore;
 import java.util.ArrayList;
 
 public class No {
-    private ArrayList<Integer> index = new ArrayList();
+    private final ArrayList<Integer> index = new ArrayList<>();
     private No noEsquerdo;
     private No noDireito;
     private int altura;
-    private String propriedade;
-
-    public No() {}
+    private final String propriedade;
 
     public No(Integer index, String propriedade) {
         this.index.add(index);
         this.propriedade = propriedade;
         this.altura = 1;
-    }
-
-    public No(int index, No noEsquerdo, No noDireito, int altura, String propriedade) {
-        this.index.add(index);
-        this.noEsquerdo = noEsquerdo;
-        this.noDireito = noDireito;
-        this.altura = altura;
-        this.propriedade = propriedade;
     }
 
     public ArrayList<Integer> getIndex() {
@@ -59,10 +49,6 @@ public class No {
 
     public String getPropriedade() {
         return propriedade;
-    }
-
-    public void setPropriedade(String propriedade) {
-        this.propriedade = propriedade;
     }
 
     @Override

@@ -5,7 +5,6 @@ import pessoa.Pessoa;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 import static enuns.PessoaProps.*;
 import static java.lang.String.format;
@@ -13,8 +12,8 @@ import static java.lang.String.format;
 public class CsvReader {
     public static ArrayList<Pessoa> reader(String planilha) {
         String arquivo = format("%s.csv",planilha);
-        BufferedReader br = null;
-        String linha = "";
+        BufferedReader br;
+        String linha;
         String divisor = ";";
         ArrayList<Pessoa> pessoas = new ArrayList<>();
 
