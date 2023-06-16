@@ -35,7 +35,7 @@ public class CsvReader {
     public static Pessoa toPessoa(String[] array) {
         Pessoa pessoa = new Pessoa();
         try {
-            pessoa.setCpf(array[CPF.getValor()]);
+            pessoa.setCpf(array[CPF.getValor()].replace("&nbsp;"," "));
             pessoa.setRg(array[RG.getValor()]);
             pessoa.setNome(array[NOME.getValor()]);
             pessoa.setDataNascimento(array[DATA_NASCIMENTO.getValor()]);

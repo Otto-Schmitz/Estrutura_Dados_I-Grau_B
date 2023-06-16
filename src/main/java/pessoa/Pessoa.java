@@ -58,4 +58,9 @@ public class Pessoa {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+
+    public String toString(){
+        return "[  Nome: "+nome+" Cpf: "+cpf+" Rg: "+rg+ " Data Nascimento: "+dataNascimento+ " Cidade: "+cidade + "  ]";
+    }
+
 }

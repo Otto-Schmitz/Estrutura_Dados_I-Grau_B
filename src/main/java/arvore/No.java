@@ -14,6 +14,7 @@ public class No {
     public No(Integer index, String propriedade) {
         this.index.add(index);
         this.propriedade = propriedade;
+        this.altura = 1;
     }
 
     public No(int index, No noEsquerdo, No noDireito, int altura, String propriedade) {
