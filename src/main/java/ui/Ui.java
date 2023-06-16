@@ -26,7 +26,7 @@ public class Ui {
             System.out.println("6 - Exibir arvore ordenada por CPF");
             System.out.println("7 - Exibir arvore ordenada por Data de Nascimento");
             System.out.println("8 - Autores");
-            System.out.println("10 - Sair\n");
+            System.out.println("9 - Sair\n");
             menuAux(trataIntMenu());
 
         }
@@ -42,11 +42,10 @@ public class Ui {
                 case 6 -> mostrarArvore(avlCpf);
                 case 7 -> mostrarArvore(avlData);
                 case 8 -> mostrarAutores();
-                case 10 -> System.out.println("Adeus");
-
+                case 9 -> System.out.println("Adeus");
             }
             System.out.println();
-            if (escolha != 10)
+            if (escolha != 9)
                 menu();
         }
 
@@ -56,7 +55,7 @@ public class Ui {
                     System.out.print("Escolha um item da lista: ");
                     String escolhaAux = sc.nextLine();
                     int escolha = Integer.parseInt(escolhaAux);
-                    if (escolha >= 0 && escolha <= 10) {
+                    if (escolha >= 0 && escolha <= 9) {
                         return escolha;
                     }
                 } catch (Exception e) {
@@ -66,9 +65,8 @@ public class Ui {
         }
 
         private static void inserir() {
-//            System.out.println("Digite o nome do arquivo Csv: ");
-//            String arquivo = sc.nextLine();
-            String arquivo = "planilha";
+            System.out.println("Digite o nome do arquivo Csv: ");
+            String arquivo = sc.nextLine();
             ArrayList<Pessoa> array = reader(arquivo);
             if (!array.isEmpty()) pessoas = array;
 
